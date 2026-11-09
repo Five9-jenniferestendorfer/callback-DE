@@ -181,9 +181,9 @@ function evaluate(r, okText){
   const txt = doc.body.textContent.replace(/\s+/g,' ').trim();
   const rt = txt.split(/Result:?/i)[1] || '';
   const code = rt.match(/(?:F9errCode|Error\s*Code)\W*?(-?\d+)/i);
-  const desc = (rt.match(/(?:F9errDesc|Error\s*Desc\w*)\W*(.*)$/i) || [,''])[1].trim();
+  const desc = (rt.match(/(?:F9errDesc|Error\s*De\w*)\W*(.*)$/i) || [,''])[1].trim();
   if (code && code[1] === '0') return show(okText, true);
-  if (code) return show('Fehlgeschlagen: Code ' + code[1] + (desc ? ' – ' + desc : ''), false);
+  if (code) return show('Fehlgeschlagen: Code ' + code[1] + (desc ? ' – ' + desc : '') + (code[1] === '708' ? ' Tipp: Die Nummer ist in der Liste mehrfach vorhanden. Löschen Sie die Duplikate mit „Aus Liste löschen“ oder in Five9.' : ''), false);
   show('Fehlgeschlagen: unerwartete Antwort von Five9 – ' + txt.slice(0,300), false);
 }
 
